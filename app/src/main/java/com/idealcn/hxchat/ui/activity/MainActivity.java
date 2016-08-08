@@ -33,17 +33,17 @@ public class MainActivity extends ChatBaseActivity {
         messageListFragment = new MessageListFragment();
         contactListFragment = new ContactListFragment();
         statusFragment = new StatusFragment();
-        fragments = new ChatBaseFragment[]{messageListFragment,contactListFragment,statusFragment};
+        fragments = new ChatBaseFragment[]{messageListFragment, contactListFragment, statusFragment};
 
-        getSupportFragmentManager().beginTransaction().add(R.id.content_container,messageListFragment,TAG_MESSAGE)
-                .add(R.id.content_container,contactListFragment,TAG_CONTACT)
-                .add(R.id.content_container,statusFragment,TAG_STATUS)
+        getSupportFragmentManager().beginTransaction().add(R.id.content_container, messageListFragment, TAG_MESSAGE)
+                .add(R.id.content_container, contactListFragment, TAG_CONTACT)
+                .add(R.id.content_container, statusFragment, TAG_STATUS)
                 .hide(contactListFragment).hide(statusFragment).show(messageListFragment).commit();
     }
 
 
     @Event(value = R.id.message_container)
-    private void changeToMessage(View view){
+    private void changeToMessage(View view) {
 
 
         if (messageListFragment.isVisible())
@@ -55,47 +55,45 @@ public class MainActivity extends ChatBaseActivity {
             return;
         }
 
-        if (statusFragment.isVisible()){
+        if (statusFragment.isVisible()) {
             getSupportFragmentManager().beginTransaction().hide(statusFragment).show(messageListFragment)
                     .commit();
             return;
         }
 
 
-
-
     }
 
     @Event(value = R.id.status_container)
-    private void changeToStatus(View view){
-        if (statusFragment.isVisible()){
+    private void changeToStatus(View view) {
+        if (statusFragment.isVisible()) {
             return;
         }
 
-        if (messageListFragment.isVisible()){
+        if (messageListFragment.isVisible()) {
             getSupportFragmentManager().beginTransaction().hide(messageListFragment)
                     .show(statusFragment).commit();
             return;
         }
 
-        if (contactListFragment.isVisible()){
+        if (contactListFragment.isVisible()) {
             getSupportFragmentManager().beginTransaction().hide(contactListFragment)
                     .show(statusFragment).commit();
         }
     }
 
     @Event(value = R.id.contact_container)
-    private void changeToContact(View view){
+    private void changeToContact(View view) {
         if (contactListFragment.isVisible())
             return;
 
-        if (messageListFragment.isVisible()){
+        if (messageListFragment.isVisible()) {
             getSupportFragmentManager().beginTransaction().hide(messageListFragment)
                     .show(contactListFragment).commit();
             return;
         }
 
-        if (statusFragment.isVisible()){
+        if (statusFragment.isVisible()) {
             getSupportFragmentManager().beginTransaction().hide(statusFragment)
                     .show(contactListFragment).commit();
         }

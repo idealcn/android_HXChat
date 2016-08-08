@@ -10,4 +10,7 @@ import org.xutils.view.annotation.ContentView;
  */
 @ContentView(R.layout.fragment_status)
 public class StatusFragment extends ChatBaseFragment {
+
+
+
 }
