@@ -1,12 +1,23 @@
 package com.idealcn.hxchat.ui.activity;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
 
 import com.idealcn.hxchat.R;
+import com.idealcn.hxchat.tools.DisplayTools;
 import com.idealcn.hxchat.ui.fragment.ChatBaseFragment;
 import com.idealcn.hxchat.ui.fragment.ContactListFragment;
+import com.idealcn.hxchat.ui.fragment.LeftMenuFragment;
 import com.idealcn.hxchat.ui.fragment.MessageListFragment;
 import com.idealcn.hxchat.ui.fragment.StatusFragment;
 
@@ -19,17 +30,30 @@ public class MainActivity extends ChatBaseActivity {
     private static final String TAG_MESSAGE = "message";
     private static final String TAG_CONTACT = "contact";
     private static final String TAG_STATUS = "status";
-    @ViewInject(R.id.btn_message)
-    private ImageButton mBtnMessage;
+    private static final String TAG_LEFT = "left";
+
 
     private ChatBaseFragment[] fragments = null;
     private MessageListFragment messageListFragment = null;
     private ContactListFragment contactListFragment = null;
     private StatusFragment statusFragment = null;
 
+    private LeftMenuFragment leftMenuFragment;
+
+    @ViewInject(R.id.main_drawer)
+    private DrawerLayout mDrawerLayout;
+
+    @ViewInject(R.id.btn_message)
+    private Button mBtnMessage;
+    @ViewInject(R.id.btn_contact)
+    private Button mBtnContact;
+    @ViewInject(R.id.btn_status)
+    private Button mBtnStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        leftMenuFragment = new LeftMenuFragment();
         messageListFragment = new MessageListFragment();
         contactListFragment = new ContactListFragment();
         statusFragment = new StatusFragment();
@@ -39,15 +63,75 @@ public class MainActivity extends ChatBaseActivity {
                 .add(R.id.content_container, contactListFragment, TAG_CONTACT)
                 .add(R.id.content_container, statusFragment, TAG_STATUS)
                 .hide(contactListFragment).hide(statusFragment).show(messageListFragment).commit();
+
+        getSupportFragmentManager().beginTransaction().add(R.id.left_container,leftMenuFragment,TAG_LEFT).commit();
+
+        mBtnContact.setSelected(false);
+        mBtnStatus.setSelected(false);
+        mBtnMessage.setSelected(true);
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.more) {
+//            showPopup( item.getActionView());
+        } else if (itemId == android.R.id.home) {
+            showLeft();
+        } else if (itemId == R.id.add) {
+            openActivity(this, AddContactActivity.class);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showLeft() {
+        if (mDrawerLayout.isDrawerOpen(Gravity.LEFT))
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        else
+            mDrawerLayout.openDrawer(Gravity.LEFT);
+        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                mDrawerLayout.scrollTo((int) slideOffset, 0);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
     }
 
 
     @Event(value = R.id.message_container)
     private void changeToMessage(View view) {
 
-
         if (messageListFragment.isVisible())
             return;
+
+        mBtnContact.setSelected(false);
+        mBtnStatus.setSelected(false);
+        mBtnMessage.setSelected(true);
+
 
         if (contactListFragment.isVisible()) {
             getSupportFragmentManager().beginTransaction().hide(contactListFragment).show(messageListFragment)
@@ -70,6 +154,11 @@ public class MainActivity extends ChatBaseActivity {
             return;
         }
 
+        mBtnContact.setSelected(false);
+        mBtnStatus.setSelected(true);
+        mBtnMessage.setSelected(false);
+
+
         if (messageListFragment.isVisible()) {
             getSupportFragmentManager().beginTransaction().hide(messageListFragment)
                     .show(statusFragment).commit();
@@ -86,6 +175,11 @@ public class MainActivity extends ChatBaseActivity {
     private void changeToContact(View view) {
         if (contactListFragment.isVisible())
             return;
+
+
+        mBtnContact.setSelected(true);
+        mBtnStatus.setSelected(false);
+        mBtnMessage.setSelected(false);
 
         if (messageListFragment.isVisible()) {
             getSupportFragmentManager().beginTransaction().hide(messageListFragment)

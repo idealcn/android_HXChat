@@ -51,6 +51,8 @@ public class LoginActivity extends ChatBaseActivity{
                 EMClient.getInstance().login(username, password, new EMCallBack() {
                     @Override
                     public void onSuccess() {
+                        EMClient.getInstance().chatManager().loadAllConversations();
+                        EMClient.getInstance().groupManager().loadAllGroups();
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

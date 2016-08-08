@@ -1,101 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/main_drawer"
     >
 
-    <FrameLayout
-        android:id="@+id/content_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
+
+
 
     <LinearLayout
-        android:background="#dfdfdf"
+
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:orientation="horizontal">
-        <RelativeLayout
-            android:onClick="changeToMessage"
-            android:id="@+id/message_container"
-            android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <FrameLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            >
-            <ImageButton
-                android:id="@+id/btn_message"
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/btn_message"
-                android:text="@string/message"/>
-            <TextView
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="99+"
-                android:layout_toRightOf="@id/btn_message"
-                android:layout_above="@id/btn_message"/>
-        </RelativeLayout>
+            />
 
-        <RelativeLayout
-            android:onClick="changeToContact"
-            android:id="@+id/contact_container"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            >
-            <ImageButton
-                android:id="@+id/btn_contact"
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/btn_contact"
-                android:text="@string/contact"/>
-            <TextView
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="99+"
-                android:layout_toRightOf="@id/btn_contact"
-                android:layout_above="@id/btn_contact"/>
-        </RelativeLayout>
+        <LinearLayout
+            android:background="#dfdfdf"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:onClick="changeToMessage"
+                android:id="@+id/message_container"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+                <Button
+                    android:layout_marginTop="8dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/btn_message_selector"
+                    android:clickable="false"
+                    android:id="@+id/btn_message"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/btn_message"
+                    android:text="@string/message"/>
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="99+"
+                    android:layout_toRightOf="@id/btn_message"
+                   />
+            </RelativeLayout>
 
-        <RelativeLayout
-            android:onClick="changeToStatus"
-            android:id="@+id/status_container"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            >
-            <ImageButton
-                android:id="@+id/btn_status"
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/btn_status"
-                android:text="@string/status"/>
-            <TextView
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="99+"
-                android:layout_toRightOf="@id/btn_status"
-                android:layout_above="@id/btn_status"/>
-        </RelativeLayout>
+            <RelativeLayout
+                android:onClick="changeToContact"
+                android:id="@+id/contact_container"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+                <Button
+                    android:layout_marginTop="8dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/btn_contact_selector"
+                    android:clickable="false"
+                    android:id="@+id/btn_contact"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/btn_contact"
+                    android:text="@string/contact"/>
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="99+"
+                    android:layout_toRightOf="@id/btn_contact"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:onClick="changeToStatus"
+                android:id="@+id/status_container"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+                <Button
+                    android:layout_marginTop="8dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/btn_status_selector"
+                    android:clickable="false"
+                    android:id="@+id/btn_status"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/btn_status"
+                    android:text="@string/status"/>
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="99+"
+                    android:layout_toRightOf="@id/btn_status"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <FrameLayout
+        android:background="@color/colorPrimary"
+        android:layout_gravity="left"
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:id="@+id/left_container"></FrameLayout>
+</android.support.v4.widget.DrawerLayout>

@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ideal="http://schemas.android.com/apk/res-auto"
+  >
+    <item android:title="add"
+        android:id="@+id/more"
+        ideal:showAsAction="never">
 
+    </item>
+
+    <item android:title="add"
+        android:id="@+id/add"
+        ideal:showAsAction="never">
+
+    </item>
+
+
+    <item android:title="add"
+        android:id="@+id/qrcode"
+        ideal:showAsAction="never">
+
+    </item>
 </menu>

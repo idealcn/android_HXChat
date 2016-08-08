@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:idealcn="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#dfdfdf"
     android:layout_height="match_parent">
-
+    <com.idealcn.hxchat.widget.DeleteInputView
+        android:id="@+id/delete_view"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        idealcn:delete_hint="输入好友用户名"
+        idealcn:text_delete_button="确定"
+        android:layout_height="55dp"></com.idealcn.hxchat.widget.DeleteInputView>
 </LinearLayout>

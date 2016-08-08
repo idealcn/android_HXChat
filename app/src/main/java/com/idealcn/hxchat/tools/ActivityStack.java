@@ -26,9 +26,18 @@ public class ActivityStack {
         activities.push(activity);
     }
 
-    public void pop(ChatBaseActivity activity){
-
+    public void pull(ChatBaseActivity activity){
+        if (activity!=null)
+        activities.remove(activity);
     }
+
+    public void pullAll(){
+        for (ChatBaseActivity activity : activities){
+            activities.remove(activity);
+        }
+    }
+
+
 
 
 }
