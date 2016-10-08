@@ -1,6 +1,9 @@
 package com.idealcn.hxchat.ui.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,7 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.idealcn.hxchat.R;
+import com.idealcn.hxchat.domain.ChatConfig;
 import com.idealcn.hxchat.ui.activity.InviteNotifyActivity;
+import com.idealcn.hxchat.widget.ContactItemView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -25,6 +30,8 @@ import java.util.List;
 public class ContactListFragment extends ChatBaseFragment implements View.OnClickListener {
     @ViewInject(R.id.contact_list)
     private ListView mContactList;
+
+    private  View headerView;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -34,10 +41,14 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initHeaderView();
+
     }
 
+
+
     private void initHeaderView() {
-        View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_contact_header, null);
+
+        headerView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_contact_header, null);
         headerView.findViewById(R.id.item_invite).setOnClickListener(this);
         headerView.findViewById(R.id.item_group).setOnClickListener(this);
         headerView.findViewById(R.id.item_chatroom).setOnClickListener(this);

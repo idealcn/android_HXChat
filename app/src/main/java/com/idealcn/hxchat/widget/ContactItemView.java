@@ -19,6 +19,7 @@ import com.idealcn.hxchat.R;
  */
 public class ContactItemView extends RelativeLayout{
 
+    private      ImageView mItemVisible;
     public ContactItemView(Context context) {
         this(context,null);
     }
@@ -29,7 +30,8 @@ public class ContactItemView extends RelativeLayout{
         addView(content);
         TextView mItemText = (TextView) findViewById(R.id.item_text);
         ImageView mItemView = (ImageView) findViewById(R.id.item_view);
-        ImageView mItemVisible = (ImageView) findViewById(R.id.item_visible);
+
+        mItemVisible = (ImageView) findViewById(R.id.item_visible);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ContactItemView);
         Drawable view = typedArray.getDrawable(R.styleable.ContactItemView_item_view);
@@ -46,5 +48,8 @@ public class ContactItemView extends RelativeLayout{
         this(context, attrs);
     }
 
+    public void setNotifyVisible(boolean visible){
+        mItemVisible.setVisibility(visible? View.VISIBLE:View.GONE);
+    }
 
 }

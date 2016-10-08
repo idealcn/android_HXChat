@@ -1,5 +1,9 @@
 package com.idealcn.hxchat.ui.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -14,12 +18,14 @@ import android.widget.ImageButton;
 import android.widget.PopupWindow;
 
 import com.idealcn.hxchat.R;
+import com.idealcn.hxchat.domain.ChatConfig;
 import com.idealcn.hxchat.tools.DisplayTools;
 import com.idealcn.hxchat.ui.fragment.ChatBaseFragment;
 import com.idealcn.hxchat.ui.fragment.ContactListFragment;
 import com.idealcn.hxchat.ui.fragment.LeftMenuFragment;
 import com.idealcn.hxchat.ui.fragment.MessageListFragment;
 import com.idealcn.hxchat.ui.fragment.StatusFragment;
+import com.idealcn.hxchat.widget.ContactItemView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -70,8 +76,36 @@ public class MainActivity extends ChatBaseActivity {
         mBtnStatus.setSelected(false);
         mBtnMessage.setSelected(true);
 
+        registerBroadcast();
+
     }
 
+    private void registerBroadcast() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ChatConfig.ACTION_INVITE);
+        registerReceiver(receiver,filter);
+    }
+
+
+
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (ChatConfig.ACTION_INVITE.equals(action)){
+
+            }
+        }
+    };
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (receiver!=null)
+            unregisterReceiver(receiver);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

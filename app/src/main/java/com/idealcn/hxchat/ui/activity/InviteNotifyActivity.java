@@ -24,6 +24,6 @@ public class InviteNotifyActivity extends ChatBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-actionBar.setTitle("申请与通知");
+        actionBar.setTitle("申请与通知");
     }
 }

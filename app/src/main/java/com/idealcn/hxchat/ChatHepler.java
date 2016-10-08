@@ -1,6 +1,7 @@
 package com.idealcn.hxchat;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.hyphenate.EMChatRoomChangeListener;
 import com.hyphenate.EMConnectionListener;
@@ -13,6 +14,9 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.NetUtils;
+import com.idealcn.hxchat.bean.InviteMessage;
+import com.idealcn.hxchat.db.InviteMessageDao;
+import com.idealcn.hxchat.domain.ChatConfig;
 import com.idealcn.hxchat.tools.LogUtils;
 
 import java.util.List;
@@ -61,6 +65,8 @@ public class ChatHepler {
         } catch (HyphenateException e) {
             e.printStackTrace();
         }
+
+
     }
 
 
@@ -121,6 +127,13 @@ public class ChatHepler {
             //过滤，检测是否存在于黑名单中
             if (blackList.contains(s))return;
 
+            InviteMessageDao messageDao = new InviteMessageDao();
+            List<InviteMessage> messageList = messageDao.getMessageList();
+
+
+            Intent intent = new Intent();
+            intent.setAction(ChatConfig.ACTION_INVITE);
+            context.sendBroadcast(intent);
             //将邀请信息保存到本地数据库，发送通知到好友申请页面
 
 //            try {

@@ -1,5 +1,9 @@
 package com.idealcn.hxchat.db;
 
+import com.idealcn.hxchat.bean.InviteMessage;
+
+import java.util.List;
+
 /**
  * author:idealgn
  * date:16-10-8 下午4:07
@@ -19,6 +23,12 @@ public class InviteMessageDao {
     static final String COLUMN_NAME_GROUPINVITER = "groupinviter";
 
     public InviteMessageDao(){
+
+    }
+
+
+    public List<InviteMessage> getMessageList(){
+        return ChatDBManager.getManager().getInviteMessageList();
 
     }
 

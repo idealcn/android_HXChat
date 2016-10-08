@@ -1,9 +1,13 @@
 package com.idealcn.hxchat.db;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.idealcn.hxchat.bean.InviteMessage;
 import com.idealcn.hxchat.bean.User;
+
+import java.util.List;
 
 /**
  * author:idealgn
@@ -42,4 +46,15 @@ public class ChatDBManager {
     }
 
 
+    public List<InviteMessage> getInviteMessageList() {
+        SQLiteDatabase database = helper.getReadableDatabase();
+        InviteMessage message = new InviteMessage();
+        Cursor cursor = database.query(InviteMessageDao.TABLE_NAME, null, null, null, null, null, null);
+        while (cursor.moveToNext()){
+            String from = cursor.getString(cursor.getColumnIndex(InviteMessageDao.COLUMN_NAME_FROM));
+            message.setFrom(from);
+
+        }
+        return null;
+    }
 }
