@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
+import com.idealcn.hxchat.R;
 import com.idealcn.hxchat.tools.ActivityStack;
 
 import org.xutils.x;
@@ -13,7 +15,7 @@ import org.xutils.x;
 /**
  * Created by idealcn on 16-8-7.
  */
-public class ChatBaseActivity extends ActionBarActivity {
+public  class ChatBaseActivity extends ActionBarActivity {
 
 
     protected  ActionBar actionBar;
@@ -37,5 +39,19 @@ public class ChatBaseActivity extends ActionBarActivity {
     protected  <T extends ChatBaseActivity> void openActivity(T activity,Class<? extends ChatBaseActivity> clazz){
         Intent intent = new Intent(activity,clazz);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+       if (itemId == android.R.id.home) {
+            onTitleLeftClick();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected  void onTitleLeftClick(){
+        finish();
     }
 }

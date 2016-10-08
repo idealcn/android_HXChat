@@ -31,6 +31,7 @@ public class AddContactActivity extends ChatBaseActivity implements DeleteInputV
     }
 
 
+
     @Override
     public void onDeleteButtonClick(View view) {
         final String username = mDeleteView.getInputText();

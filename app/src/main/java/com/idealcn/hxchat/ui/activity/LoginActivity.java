@@ -37,6 +37,7 @@ public class LoginActivity extends ChatBaseActivity{
 
     }
 
+
     @Event(value = R.id.signup)
     private void login(View view){
         final ProgressDialog dialog = ProgressDialog.show(this, "提示", "正在登陆...", true, false);

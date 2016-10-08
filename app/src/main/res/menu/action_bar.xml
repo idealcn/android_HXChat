@@ -2,20 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ideal="http://schemas.android.com/apk/res-auto"
   >
-    <item android:title="add"
-        android:id="@+id/more"
-        ideal:showAsAction="never">
 
-    </item>
 
-    <item android:title="add"
+    <item android:title="添加好友"
         android:id="@+id/add"
         ideal:showAsAction="never">
 
     </item>
 
 
-    <item android:title="add"
+    <item android:title="扫一扫"
         android:id="@+id/qrcode"
         ideal:showAsAction="never">
 

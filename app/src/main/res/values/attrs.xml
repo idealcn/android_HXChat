@@ -5,4 +5,10 @@
         <attr name="background_delete_button" format="reference"/>
         <attr name="text_delete_button" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="ContactItemView">
+        <attr name="item_view" format="reference"/>
+        <attr name="item_text" format="string"/>
+        <attr name="item_visible" format="boolean"/>
+    </declare-styleable>
 </resources>

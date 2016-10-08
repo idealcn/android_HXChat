@@ -71,7 +71,8 @@ public class LeftMenuFragment extends ChatBaseFragment {
                     @Override
                     public void onSuccess() {
                         Log.d("chat","logout success");
-                        ActivityStack.getInstance().pullAll();
+                        // java.util.ConcurrentModificationException
+//                        ActivityStack.getInstance().pullAll();
                         getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
                         getActivity().finish();
                     }

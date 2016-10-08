@@ -83,14 +83,17 @@ public class MainActivity extends ChatBaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
 
-        if (itemId == R.id.more) {
+        if (itemId == R.id.qrcode) {
 //            showPopup( item.getActionView());
-        } else if (itemId == android.R.id.home) {
-            showLeft();
-        } else if (itemId == R.id.add) {
+        }  else if (itemId == R.id.add) {
             openActivity(this, AddContactActivity.class);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onTitleLeftClick() {
+        showLeft();
     }
 
     private void showLeft() {

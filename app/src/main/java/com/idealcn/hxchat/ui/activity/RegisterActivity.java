@@ -32,6 +32,7 @@ public class RegisterActivity extends ChatBaseActivity {
     }
 
 
+
     @Event(value = R.id.confirm)
     private void register(View view) {
         final ProgressDialog dialog = ProgressDialog.show(this, "提示", "正在注册...", true, false);

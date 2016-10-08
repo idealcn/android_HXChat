@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:idealcn="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.idealcn.hxchat.widget.ContactItemView
+        android:id="@+id/item_invite"
+        idealcn:item_text="申请通知"
+        idealcn:item_view="@drawable/em_new_friends_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        idealcn:item_visible="false"
+        />
+    <View
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="#f0f0f0"/>
+    <com.idealcn.hxchat.widget.ContactItemView
+        android:id="@+id/item_group"
+        idealcn:item_text="群组"
+        idealcn:item_view="@drawable/em_groups_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        idealcn:item_visible="false"
+        />
+    <View
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="#f0f0f0"/>
+    <com.idealcn.hxchat.widget.ContactItemView
+        android:id="@+id/item_chatroom"
+        idealcn:item_text="聊天室"
+        idealcn:item_view="@drawable/em_groups_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        idealcn:item_visible="false"/>
+</LinearLayout>

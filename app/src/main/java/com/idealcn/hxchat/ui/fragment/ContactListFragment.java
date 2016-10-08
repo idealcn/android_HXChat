@@ -1,15 +1,68 @@
 package com.idealcn.hxchat.ui.fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import com.idealcn.hxchat.R;
+import com.idealcn.hxchat.ui.activity.InviteNotifyActivity;
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * author:idealcn
  * date:16-8-7 下午10:43
  */
 @ContentView(R.layout.fragment_contact_list)
-public class ContactListFragment extends ChatBaseFragment {
+public class ContactListFragment extends ChatBaseFragment implements View.OnClickListener {
+    @ViewInject(R.id.contact_list)
+    private ListView mContactList;
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initHeaderView();
+    }
+
+    private void initHeaderView() {
+        View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_contact_header, null);
+        headerView.findViewById(R.id.item_invite).setOnClickListener(this);
+        headerView.findViewById(R.id.item_group).setOnClickListener(this);
+        headerView.findViewById(R.id.item_chatroom).setOnClickListener(this);
+        mContactList.addHeaderView(headerView);
+
+        List<String> lists = new ArrayList<>();
+        lists.add("item---1");
+        lists.add("item---3");
+        mContactList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,lists));
+    }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.item_invite:
+               startActivity(new Intent(getActivity(), InviteNotifyActivity.class));
+                break;
+            case R.id.item_group:
+                break;
+            case R.id.item_chatroom:
+
+                break;
+            default:
+                break;
+        }
+    }
 }
