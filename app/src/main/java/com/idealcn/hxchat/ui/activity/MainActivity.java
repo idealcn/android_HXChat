@@ -56,6 +56,8 @@ public class MainActivity extends ChatBaseActivity {
     @ViewInject(R.id.btn_status)
     private Button mBtnStatus;
 
+    private boolean isInviteIconVisible;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,36 +78,15 @@ public class MainActivity extends ChatBaseActivity {
         mBtnStatus.setSelected(false);
         mBtnMessage.setSelected(true);
 
-        registerBroadcast();
 
     }
 
-    private void registerBroadcast() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(ChatConfig.ACTION_INVITE);
-        registerReceiver(receiver,filter);
-    }
 
 
 
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (ChatConfig.ACTION_INVITE.equals(action)){
-
-            }
-        }
-    };
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (receiver!=null)
-            unregisterReceiver(receiver);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -130,7 +111,7 @@ public class MainActivity extends ChatBaseActivity {
         showLeft();
     }
 
-    private void showLeft() {
+    public void showLeft() {
         if (mDrawerLayout.isDrawerOpen(Gravity.LEFT))
             mDrawerLayout.closeDrawer(Gravity.LEFT);
         else
@@ -229,4 +210,5 @@ public class MainActivity extends ChatBaseActivity {
                     .show(contactListFragment).commit();
         }
     }
+
 }

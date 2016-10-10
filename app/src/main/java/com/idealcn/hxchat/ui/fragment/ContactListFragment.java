@@ -1,5 +1,6 @@
 package com.idealcn.hxchat.ui.fragment;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +14,9 @@ import android.widget.ListView;
 
 import com.idealcn.hxchat.R;
 import com.idealcn.hxchat.domain.ChatConfig;
+import com.idealcn.hxchat.tools.PreferenceUtils;
 import com.idealcn.hxchat.ui.activity.InviteNotifyActivity;
+import com.idealcn.hxchat.ui.activity.MainActivity;
 import com.idealcn.hxchat.widget.ContactItemView;
 
 import org.xutils.view.annotation.ContentView;
@@ -32,16 +35,16 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
     private ListView mContactList;
 
     private  View headerView;
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
+
+
+
+
+    private boolean flag;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initHeaderView();
-
     }
 
 
@@ -54,17 +57,30 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
         headerView.findViewById(R.id.item_chatroom).setOnClickListener(this);
         mContactList.addHeaderView(headerView);
 
+        ContactItemView contactItemView = (ContactItemView) headerView.findViewById(R.id.item_invite);
+        contactItemView.setNotifyVisible(flag);
+
         List<String> lists = new ArrayList<>();
         lists.add("item---1");
         lists.add("item---3");
         mContactList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,lists));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        flag = PreferenceUtils.getInstance().getAcceptInvite();
+        ContactItemView contactItemView = (ContactItemView) headerView.findViewById(R.id.item_invite);
+        contactItemView.setNotifyVisible(flag);
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.item_invite:
+                PreferenceUtils.getInstance().setAcceptInvite(false);
+//                ((ContactItemView) headerView.findViewById(R.id.item_invite)).setNotifyVisible(false);
                startActivity(new Intent(getActivity(), InviteNotifyActivity.class));
                 break;
             case R.id.item_group:

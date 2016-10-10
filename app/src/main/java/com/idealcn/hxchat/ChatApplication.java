@@ -2,6 +2,8 @@ package com.idealcn.hxchat;
 
 import android.app.Application;
 
+import com.idealcn.hxchat.tools.PreferenceUtils;
+
 import org.xutils.x;
 
 /**
@@ -25,7 +27,7 @@ public class ChatApplication extends Application {
         instance = this;
 
        ChatHepler.getInstance().init(this);
-
+        PreferenceUtils.getInstance().init(this);
         //xutils
         x.Ext.init(this);
 

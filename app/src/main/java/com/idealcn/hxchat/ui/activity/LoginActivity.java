@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.idealcn.hxchat.R;
+import com.idealcn.hxchat.tools.PreferenceUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
@@ -57,6 +58,10 @@ public class LoginActivity extends ChatBaseActivity{
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                PreferenceUtils instance = PreferenceUtils.getInstance();
+                                instance.setCurrentPassword(password);
+                                instance.setCurrentUserName(username);
+
                                 dialog.dismiss();
                                 openActivity(LoginActivity.this,MainActivity.class);
                                 finish();

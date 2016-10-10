@@ -16,6 +16,8 @@ import com.hyphenate.chat.EMClient;
 import com.idealcn.hxchat.R;
 import com.idealcn.hxchat.tools.ActivityStack;
 import com.idealcn.hxchat.ui.activity.LoginActivity;
+import com.idealcn.hxchat.ui.activity.MainActivity;
+import com.idealcn.hxchat.ui.activity.UserProfileActivity;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -45,13 +47,16 @@ public class LeftMenuFragment extends ChatBaseFragment {
     }
 
     private  void initData(){
-        mLeftListView.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,new String[]{"个人资料","设置","退出登陆"}));
+        mLeftListView.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,new String[]{getResources().getString(R.string.title_user_profile),"设置","退出登陆"}));
 
 
         mLeftListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
+                    case 0:
+                        showProfile();
+                        break;
                     case 2:
                         logout();
                         break;
@@ -60,6 +65,14 @@ public class LeftMenuFragment extends ChatBaseFragment {
                 }
             }
         });
+    }
+
+    private void showProfile() {
+        openActivity(getActivity(),UserProfileActivity.class);
+        if (getActivity() instanceof MainActivity){
+            MainActivity activity = (MainActivity) getActivity();
+            activity.showLeft();
+        }
     }
 
     private void logout() {

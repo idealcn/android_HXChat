@@ -3,4 +3,6 @@
     <string name="message">消息</string>
     <string name="status">状态</string>
     <string name="contact">联系人</string>
+
+    <string name="title_user_profile">个人资料</string>
 </resources>

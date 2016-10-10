@@ -18,8 +18,10 @@ import com.idealcn.hxchat.bean.InviteMessage;
 import com.idealcn.hxchat.db.InviteMessageDao;
 import com.idealcn.hxchat.domain.ChatConfig;
 import com.idealcn.hxchat.tools.LogUtils;
+import com.idealcn.hxchat.tools.PreferenceUtils;
 
 import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Created by idealgn on 16-10-8.
@@ -125,15 +127,11 @@ public class ChatHepler {
         public void onContactInvited(String s, String s1) {
             LogUtils.d("onContactInvited");
             //过滤，检测是否存在于黑名单中
-            if (blackList.contains(s))return;
-
-            InviteMessageDao messageDao = new InviteMessageDao();
-            List<InviteMessage> messageList = messageDao.getMessageList();
-
-
-            Intent intent = new Intent();
-            intent.setAction(ChatConfig.ACTION_INVITE);
-            context.sendBroadcast(intent);
+//            if (blackList.contains(s))return;
+//
+//            InviteMessageDao messageDao = new InviteMessageDao();
+//            List<InviteMessage> messageList = messageDao.getMessageList();
+            PreferenceUtils.getInstance().setAcceptInvite(true);
             //将邀请信息保存到本地数据库，发送通知到好友申请页面
 
 //            try {

@@ -24,7 +24,7 @@
         <activity android:name=".ui.activity.RegisterActivity"/>
         <activity android:name=".ui.activity.AddContactActivity"/>
         <activity android:name=".ui.activity.InviteNotifyActivity"/>
-
+        <activity android:name=".ui.activity.UserProfileActivity"/>
 
 
         <!--hyphenate-->
