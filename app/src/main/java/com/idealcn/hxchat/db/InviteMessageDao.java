@@ -22,14 +22,29 @@ public class InviteMessageDao {
     static final String COLUMN_NAME_ISINVITEFROMME = "isInviteFromMe";
     static final String COLUMN_NAME_GROUPINVITER = "groupinviter";
 
-    public InviteMessageDao(){
 
+
+    public static final String TABLE_CREATOR = "create table "+ TABLE_NAME
+            +" ( _ID INTEGER  PRIMARY KEY AUTOINCREMENT,"
+            +COLUMN_NAME_FROM+" text,"
+            +COLUMN_NAME_REASON+" text,"
+            +COLUMN_NAME_TIME+" text"
+            +");";
+
+
+    private ChatDBManager manager;
+    public InviteMessageDao(){
+        manager = ChatDBManager.getManager();
     }
 
 
     public List<InviteMessage> getMessageList(){
         return ChatDBManager.getManager().getInviteMessageList();
 
+    }
+
+    public void saveInviteMsg(InviteMessage msg){
+        manager.saveInviteMsg(msg);
     }
 
 

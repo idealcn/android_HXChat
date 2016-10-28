@@ -124,8 +124,8 @@ public class ChatHepler {
         }
 
         @Override
-        public void onContactInvited(String s, String s1) {
-            LogUtils.d("onContactInvited");
+        public void onContactInvited(String username, String reason) {
+            LogUtils.d("onContactInvited---username--"+username+"--reason--"+reason);
             //过滤，检测是否存在于黑名单中
 //            if (blackList.contains(s))return;
 //
@@ -140,11 +140,20 @@ public class ChatHepler {
 //            } catch (HyphenateException e) {
 //                e.printStackTrace();
 //            }
+            //保存邀请信息到本地数据库
+            InviteMessageDao dao = new InviteMessageDao();
+            InviteMessage msg = new InviteMessage();
+            msg.setFrom(username);
+            msg.setReason(reason==null?"":reason);
+            msg.setTime(System.currentTimeMillis());
+            dao.saveInviteMsg(msg);
+
         }
 
         @Override
         public void onContactAgreed(String s) {
             LogUtils.d("onContactAgreed");
+
         }
 
         @Override

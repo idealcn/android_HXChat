@@ -31,6 +31,7 @@ public class ChatDBOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(UserDao.TABLE_CREATOR);
+        db.execSQL(InviteMessageDao.TABLE_CREATOR);
     }
 
     @Override

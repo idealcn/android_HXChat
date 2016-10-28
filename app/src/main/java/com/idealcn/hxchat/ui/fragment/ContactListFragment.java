@@ -13,10 +13,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.idealcn.hxchat.R;
+import com.idealcn.hxchat.bean.User;
+import com.idealcn.hxchat.db.UserDao;
 import com.idealcn.hxchat.domain.ChatConfig;
 import com.idealcn.hxchat.tools.PreferenceUtils;
+import com.idealcn.hxchat.ui.activity.ChatRoomActivity;
+import com.idealcn.hxchat.ui.activity.GroupActivity;
 import com.idealcn.hxchat.ui.activity.InviteNotifyActivity;
 import com.idealcn.hxchat.ui.activity.MainActivity;
+import com.idealcn.hxchat.ui.adapter.ContactListAdapter;
 import com.idealcn.hxchat.widget.ContactItemView;
 
 import org.xutils.view.annotation.ContentView;
@@ -36,8 +41,9 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
 
     private  View headerView;
 
+    ContactListAdapter adapter;
 
-
+    List<User> userList = new ArrayList<>();
 
     private boolean flag;
 
@@ -60,10 +66,14 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
         ContactItemView contactItemView = (ContactItemView) headerView.findViewById(R.id.item_invite);
         contactItemView.setNotifyVisible(flag);
 
-        List<String> lists = new ArrayList<>();
-        lists.add("item---1");
-        lists.add("item---3");
-        mContactList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,lists));
+
+        adapter = new ContactListAdapter(getActivity(), android.R.layout.simple_list_item_1, userList);
+        mContactList.setAdapter(adapter);
+
+//        List<String> lists = new ArrayList<>();
+//        lists.add("item---1");
+//        lists.add("item---3");
+//        mContactList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,lists));
     }
 
     @Override
@@ -73,6 +83,11 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
         flag = PreferenceUtils.getInstance().getAcceptInvite();
         ContactItemView contactItemView = (ContactItemView) headerView.findViewById(R.id.item_invite);
         contactItemView.setNotifyVisible(flag);
+
+
+        UserDao userDao = new UserDao();
+        userList.addAll( userDao.getContact());
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -84,9 +99,10 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
                startActivity(new Intent(getActivity(), InviteNotifyActivity.class));
                 break;
             case R.id.item_group:
+                startActivity(new Intent(getActivity(), GroupActivity.class));
                 break;
             case R.id.item_chatroom:
-
+                startActivity(new Intent(getActivity(), ChatRoomActivity.class));
                 break;
             default:
                 break;
