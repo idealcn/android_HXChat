@@ -27,6 +27,10 @@
         <activity android:name=".ui.activity.UserProfileActivity"/>
         <activity android:name=".ui.activity.GroupActivity"/>
         <activity android:name=".ui.activity.ChatRoomActivity"/>
+        <activity android:name=".ui.activity.VideoCallActivity"/>
+
+
+
 
 
         <!--hyphenate-->

@@ -9,10 +9,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMContact;
 import com.hyphenate.exceptions.HyphenateException;
 import com.idealcn.hxchat.R;
 import com.idealcn.hxchat.bean.InviteMessage;
-import com.idealcn.hxchat.bean.User;
 import com.idealcn.hxchat.db.UserDao;
 import com.idealcn.hxchat.ui.ViewHolder;
 
@@ -96,8 +96,7 @@ public class InviteMsgAdapter extends BaseAdapter  {
             EMClient.getInstance().contactManager().acceptInvitation(from);
             //保存好友到本地数据库
             UserDao userDao = new UserDao();
-            User user = new User();
-            user.setNick(from);
+            EMContact user = new EMContact(from);
             userDao.saveUser(user);
         } catch (HyphenateException e) {
             e.printStackTrace();

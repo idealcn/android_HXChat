@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.idealcn.hxchat.bean.User;
+import com.hyphenate.chat.EMContact;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import java.util.List;
  * author:idealgn
  * date:16-10-8 下午4:58
  */
-public class ContactListAdapter extends ArrayAdapter<User>{
+public class ContactListAdapter extends ArrayAdapter<EMContact>{
 
-    public ContactListAdapter(Context context, int resource, List<User> userList) {
+    public ContactListAdapter(Context context, int resource, List<EMContact> userList) {
         super(context, resource,userList);
     }
 

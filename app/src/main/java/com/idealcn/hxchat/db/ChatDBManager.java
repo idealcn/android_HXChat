@@ -4,8 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.hyphenate.chat.EMContact;
 import com.idealcn.hxchat.bean.InviteMessage;
-import com.idealcn.hxchat.bean.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,19 +29,13 @@ public class ChatDBManager {
         return manager;
     }
 
-    public void saveUser(User user) {
+    public void saveUser(EMContact user) {
         SQLiteDatabase database = helper.getWritableDatabase();
         if (database.isOpen()) {
             ContentValues values = new ContentValues();
-            String avatar = user.getAvatar();
-            if (avatar != null)
-                values.put(UserDao.KEY_AVATAR, avatar);
             String username = user.getUsername();
             if (username != null)
                 values.put(UserDao.KEY_NAME, username);
-            String nick = user.getNick();
-            if (nick != null)
-                values.put(UserDao.KEY_NICK, nick);
             database.replace(UserDao.TABLE_NAME, null, values);
         }
     }
@@ -85,15 +79,14 @@ public class ChatDBManager {
         }
     }
 
-    public List<User> getContact() {
-        List<User> userList = new ArrayList<>();
+    public List<EMContact> getContact() {
+        List<EMContact> userList = new ArrayList<>();
         SQLiteDatabase database = helper.getReadableDatabase();
-        String sql = "select * from "+UserDao.TABLE_NAME;
+        String sql = "select "+UserDao.KEY_NAME+" from "+UserDao.TABLE_NAME;
         Cursor cursor = database.rawQuery(sql, null);
         while(cursor.moveToNext()){
-            User user = new User();
-            String nick = cursor.getString(cursor.getColumnIndex(UserDao.KEY_NICK));
-            user.setNick(nick);
+            String name = cursor.getString(cursor.getColumnIndex(UserDao.KEY_NAME));
+            EMContact user = new EMContact(name);
             userList.add(user);
         }
         return userList;

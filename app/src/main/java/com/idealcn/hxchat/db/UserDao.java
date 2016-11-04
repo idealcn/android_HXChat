@@ -1,6 +1,6 @@
 package com.idealcn.hxchat.db;
 
-import com.idealcn.hxchat.bean.User;
+import com.hyphenate.chat.EMContact;
 
 import java.util.List;
 
@@ -28,12 +28,12 @@ public class UserDao {
         manager = ChatDBManager.getManager();
     }
 
-    public void saveUser(User user){
+    public void saveUser(EMContact user){
         manager.saveUser(user);
     }
 
 
-    public List<User> getContact() {
+    public List<EMContact> getContact() {
         return manager.getContact();
     }
 }

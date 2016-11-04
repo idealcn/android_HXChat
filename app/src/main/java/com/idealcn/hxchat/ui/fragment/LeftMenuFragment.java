@@ -14,7 +14,6 @@ import android.widget.ListView;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.idealcn.hxchat.R;
-import com.idealcn.hxchat.tools.ActivityStack;
 import com.idealcn.hxchat.ui.activity.LoginActivity;
 import com.idealcn.hxchat.ui.activity.MainActivity;
 import com.idealcn.hxchat.ui.activity.UserProfileActivity;
@@ -56,6 +55,9 @@ public class LeftMenuFragment extends ChatBaseFragment {
                 switch (position){
                     case 0:
                         showProfile();
+                        break;
+                    case 1:
+
                         break;
                     case 2:
                         logout();

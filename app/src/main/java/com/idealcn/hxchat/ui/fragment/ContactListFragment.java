@@ -1,26 +1,19 @@
 package com.idealcn.hxchat.ui.fragment;
 
-import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.hyphenate.chat.EMContact;
 import com.idealcn.hxchat.R;
-import com.idealcn.hxchat.bean.User;
 import com.idealcn.hxchat.db.UserDao;
-import com.idealcn.hxchat.domain.ChatConfig;
 import com.idealcn.hxchat.tools.PreferenceUtils;
 import com.idealcn.hxchat.ui.activity.ChatRoomActivity;
 import com.idealcn.hxchat.ui.activity.GroupActivity;
 import com.idealcn.hxchat.ui.activity.InviteNotifyActivity;
-import com.idealcn.hxchat.ui.activity.MainActivity;
 import com.idealcn.hxchat.ui.adapter.ContactListAdapter;
 import com.idealcn.hxchat.widget.ContactItemView;
 
@@ -43,7 +36,7 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
 
     ContactListAdapter adapter;
 
-    List<User> userList = new ArrayList<>();
+    List<EMContact> userList = new ArrayList<>();
 
     private boolean flag;
 

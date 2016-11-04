@@ -20,17 +20,16 @@ public class ChatApplication extends Application {
 
 
 
+
     @Override
     public void onCreate() {
         super.onCreate();
-
         instance = this;
 
        ChatHepler.getInstance().init(this);
         PreferenceUtils.getInstance().init(this);
         //xutils
         x.Ext.init(this);
-
 
 
     }

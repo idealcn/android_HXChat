@@ -1,38 +1,36 @@
 package com.idealcn.hxchat.ui.activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.PopupWindow;
 
+import com.hyphenate.EMValueCallBack;
+import com.hyphenate.chat.EMClient;
 import com.idealcn.hxchat.R;
-import com.idealcn.hxchat.domain.ChatConfig;
-import com.idealcn.hxchat.tools.DisplayTools;
+import com.idealcn.hxchat.tools.LogUtils;
 import com.idealcn.hxchat.ui.fragment.ChatBaseFragment;
 import com.idealcn.hxchat.ui.fragment.ContactListFragment;
 import com.idealcn.hxchat.ui.fragment.LeftMenuFragment;
 import com.idealcn.hxchat.ui.fragment.MessageListFragment;
 import com.idealcn.hxchat.ui.fragment.StatusFragment;
-import com.idealcn.hxchat.widget.ContactItemView;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
+import java.util.List;
+
 @ContentView(R.layout.activity_main)
 public class MainActivity extends ChatBaseActivity {
+
+    private String TAG = "hx";
+
+
     private static final String TAG_MESSAGE = "message";
     private static final String TAG_CONTACT = "contact";
     private static final String TAG_STATUS = "status";
@@ -78,7 +76,20 @@ public class MainActivity extends ChatBaseActivity {
         mBtnStatus.setSelected(false);
         mBtnMessage.setSelected(true);
 
+        EMClient.getInstance().contactManager().aysncGetAllContactsFromServer(new EMValueCallBack<List<String>>() {
+            @Override
+            public void onSuccess(List<String> strings) {
+                LogUtils.d("onSuccess: "+strings.size());
+                for (String s : strings){
 
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                LogUtils.d("onError: "+s+i);
+            }
+        });
     }
 
 

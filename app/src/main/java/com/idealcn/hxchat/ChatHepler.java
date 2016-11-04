@@ -2,6 +2,8 @@ package com.idealcn.hxchat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.util.Log;
 
 import com.hyphenate.EMChatRoomChangeListener;
 import com.hyphenate.EMConnectionListener;
@@ -9,6 +11,7 @@ import com.hyphenate.EMContactListener;
 import com.hyphenate.EMError;
 import com.hyphenate.EMGroupChangeListener;
 import com.hyphenate.EMMessageListener;
+import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
@@ -17,6 +20,7 @@ import com.hyphenate.util.NetUtils;
 import com.idealcn.hxchat.bean.InviteMessage;
 import com.idealcn.hxchat.db.InviteMessageDao;
 import com.idealcn.hxchat.domain.ChatConfig;
+import com.idealcn.hxchat.receiver.CallReceiver;
 import com.idealcn.hxchat.tools.LogUtils;
 import com.idealcn.hxchat.tools.PreferenceUtils;
 
@@ -27,13 +31,13 @@ import java.util.TreeMap;
  * Created by idealgn on 16-10-8.
  */
 public class ChatHepler {
-
+    private static final String TAG = "hx";
     private static ChatHepler instance = null;
     private Context context;
 
     //黑名单列表
     private List<String> blackList;
-
+    private CallReceiver callReceiver;
     public synchronized static ChatHepler getInstance() {
         if (instance == null)
             instance = new ChatHepler();
@@ -46,7 +50,7 @@ public class ChatHepler {
     public void init(Context context) {
         this.context = context;
         EMOptions options = new EMOptions();
-        options.setAcceptInvitationAlways(false);
+        options.setAcceptInvitationAlways(true);
         EMClient.getInstance().init(context, options);
         //状态连接的监听
         EMClient.getInstance().addConnectionListener(new MyConnectionListener());
@@ -69,6 +73,11 @@ public class ChatHepler {
         }
 
 
+        //注册语音和视频的广播接收者
+        callReceiver = new CallReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(EMClient.getInstance().callManager().getIncomingCallBroadcastAction());
+        context.registerReceiver(callReceiver,filter);
     }
 
 
