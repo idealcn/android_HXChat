@@ -35,9 +35,9 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
 
     private  View headerView;
 
-    ContactListAdapter adapter;
+    private ContactListAdapter adapter;
 
-    List<EMContact> userList = new ArrayList<>();
+    private List<EMContact> userList = new ArrayList<>();
 
     private boolean flag;
 

@@ -3,6 +3,7 @@ package com.idealcn.hxchat.ui.activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,13 +11,19 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.hyphenate.EMCallBack;
+import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMContact;
 import com.idealcn.hxchat.R;
+import com.idealcn.hxchat.db.UserDao;
+import com.idealcn.hxchat.tools.LogUtils;
 import com.idealcn.hxchat.tools.PreferenceUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
+
+import java.util.List;
 
 /**
  * author:idealcn
@@ -32,23 +39,61 @@ public class LoginActivity extends ChatBaseActivity{
     private Button mBtnIn;
     @ViewInject(R.id.signup)
     private Button mBtnUp;
+
+    private ProgressDialog dialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         String currentUserName = PreferenceUtils.getInstance().getCurrentUserName();
         if(!TextUtils.isEmpty(currentUserName))
             mLoginName.setText(currentUserName);
     }
 
+    private Handler handler  = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+           final  UserDao userDao = new UserDao();
+            dialog.setMessage("获取好友列表");
+            EMClient.getInstance().contactManager().aysncGetAllContactsFromServer(new EMValueCallBack<List<String>>() {
+                @Override
+                public void onSuccess(List<String> strings) {
+                    LogUtils.d("onSuccess: "+strings.size());
+                    for (String s : strings){
+                        if (!userDao.hasUser(s)) {
+                            EMContact user = new EMContact(s);
+                            userDao.saveUser(user);
+                        }
+                    }
+                    dialog.dismiss();
+                    openActivity(LoginActivity.this,MainActivity.class);
+                    finish();
+                }
+
+                @Override
+                public void onError(int i, String s) {
+                    LogUtils.d("onError: "+s+i);
+                }
+            });
+
+
+
+
+        }
+    };
 
     @Event(value = R.id.signup)
     private void login(View view){
-        final ProgressDialog dialog = ProgressDialog.show(this, "提示", "正在登陆...", true, false);
+
+        dialog = ProgressDialog.show(this, "提示", "正在登陆...", true, false);
         dialog.show();
         final String username = mLoginName.getText().toString().trim();
         final String password = mLoginPassword.getText().toString().trim();
-
+        PreferenceUtils instance = PreferenceUtils.getInstance();
+        instance.setCurrentPassword(password);
+        instance.setCurrentUserName(username);
         new Thread(){
             @Override
             public void run() {
@@ -58,18 +103,8 @@ public class LoginActivity extends ChatBaseActivity{
                     public void onSuccess() {
                         EMClient.getInstance().chatManager().loadAllConversations();
                         EMClient.getInstance().groupManager().loadAllGroups();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                PreferenceUtils instance = PreferenceUtils.getInstance();
-                                instance.setCurrentPassword(password);
-                                instance.setCurrentUserName(username);
 
-                                dialog.dismiss();
-                                openActivity(LoginActivity.this,MainActivity.class);
-                                finish();
-                            }
-                        });
+                        handler.sendEmptyMessage(0);
                     }
 
                     @Override

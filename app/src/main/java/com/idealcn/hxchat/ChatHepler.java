@@ -13,12 +13,14 @@ import com.hyphenate.EMGroupChangeListener;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMContact;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.NetUtils;
 import com.idealcn.hxchat.bean.InviteMessage;
 import com.idealcn.hxchat.db.InviteMessageDao;
+import com.idealcn.hxchat.db.UserDao;
 import com.idealcn.hxchat.domain.ChatConfig;
 import com.idealcn.hxchat.receiver.CallReceiver;
 import com.idealcn.hxchat.tools.LogUtils;
@@ -34,7 +36,7 @@ public class ChatHepler {
     private static final String TAG = "hx";
     private static ChatHepler instance = null;
     private Context context;
-
+    private UserDao userDao;
     //黑名单列表
     private List<String> blackList;
     private CallReceiver callReceiver;
@@ -48,6 +50,7 @@ public class ChatHepler {
     }
 
     public void init(Context context) {
+        userDao= new UserDao();
         this.context = context;
         EMOptions options = new EMOptions();
         options.setAcceptInvitationAlways(false);
@@ -155,7 +158,8 @@ public class ChatHepler {
         @Override
         public void onContactAgreed(String s) {
             LogUtils.d("onContactAgreed");
-
+            EMContact user = new EMContact(s);
+            userDao.saveUser(user);
         }
 
         @Override

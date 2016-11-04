@@ -57,7 +57,7 @@ public class MainActivity extends ChatBaseActivity {
     private Button mBtnStatus;
 
     private boolean isInviteIconVisible;
-    private UserDao userDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,24 +78,8 @@ public class MainActivity extends ChatBaseActivity {
         mBtnContact.setSelected(false);
         mBtnStatus.setSelected(false);
         mBtnMessage.setSelected(true);
-        userDao = new UserDao();
-        EMClient.getInstance().contactManager().aysncGetAllContactsFromServer(new EMValueCallBack<List<String>>() {
-            @Override
-            public void onSuccess(List<String> strings) {
-                LogUtils.d("onSuccess: "+strings.size());
-                for (String s : strings){
-                    if (!userDao.hasUser(s)) {
-                        EMContact user = new EMContact(s);
-                        userDao.saveUser(user);
-                    }
-                }
-            }
 
-            @Override
-            public void onError(int i, String s) {
-                LogUtils.d("onError: "+s+i);
-            }
-        });
+
     }
 
 

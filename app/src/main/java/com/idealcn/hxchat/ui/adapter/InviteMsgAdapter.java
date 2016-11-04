@@ -75,6 +75,7 @@ public class InviteMsgAdapter extends BaseAdapter  {
             public void onClick(View v) {
                 accept(message.getFrom());
                 btnAccept.setEnabled(false);
+                btnRefuse.setEnabled(false);
             }
         });
         btnRefuse.setOnClickListener(new View.OnClickListener() {

@@ -26,8 +26,8 @@ public class ChatApplication extends Application {
         super.onCreate();
         instance = this;
 
-       ChatHepler.getInstance().init(this);
         PreferenceUtils.getInstance().init(this);
+        ChatHepler.getInstance().init(this);
         //xutils
         x.Ext.init(this);
 

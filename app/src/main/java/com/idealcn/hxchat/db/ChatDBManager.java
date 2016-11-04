@@ -29,6 +29,8 @@ public class ChatDBManager {
         return manager;
     }
 
+
+
     public void saveUser(EMContact user) {
         SQLiteDatabase database = helper.getWritableDatabase();
         if (database.isOpen()) {

@@ -14,6 +14,9 @@ import android.widget.ListView;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.idealcn.hxchat.R;
+import com.idealcn.hxchat.db.ChatDBOpenHelper;
+import com.idealcn.hxchat.tools.CommonUtils;
+import com.idealcn.hxchat.tools.PreferenceUtils;
 import com.idealcn.hxchat.ui.activity.LoginActivity;
 import com.idealcn.hxchat.ui.activity.MainActivity;
 import com.idealcn.hxchat.ui.activity.UserProfileActivity;
@@ -88,8 +91,11 @@ public class LeftMenuFragment extends ChatBaseFragment {
                         Log.d("chat","logout success");
                         // java.util.ConcurrentModificationException
 //                        ActivityStack.getInstance().pullAll();
-                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                        PreferenceUtils.getInstance().clearAll();
+                        CommonUtils.deleteDatabase(getActivity());
                         getActivity().finish();
+                        System.exit(0);
+//                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
                     }
 
                     @Override

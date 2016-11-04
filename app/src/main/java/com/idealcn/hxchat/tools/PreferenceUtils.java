@@ -58,4 +58,11 @@ public class PreferenceUtils {
     public boolean getAcceptInvite(){
         return sp.getBoolean(KEY_ACCEPT_INVITE,false);
     }
+
+    /**
+     * 清除本地数据
+     */
+    public void clearAll() {
+        sp.edit().clear().commit();
+    }
 }

@@ -24,9 +24,12 @@ public class ChatDBOpenHelper extends SQLiteOpenHelper {
         return helper;
     }
 
+    private static String getDbName(){
+        return PreferenceUtils.getInstance().getCurrentUserName()+DB_NAME;
+    }
 
     private ChatDBOpenHelper(Context context) {
-        super(context, PreferenceUtils.getInstance().getCurrentUserName()+DB_NAME, null, DB_VERSION);
+        super(context, getDbName(), null, DB_VERSION);
     }
 
     @Override
@@ -37,5 +40,13 @@ public class ChatDBOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
+
+
+    public void close(){
+        if (helper!=null) {
+            helper.close();
+            helper = null;
+        }
     }
 }
