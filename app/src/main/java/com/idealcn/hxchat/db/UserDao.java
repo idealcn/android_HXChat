@@ -36,7 +36,7 @@ public class UserDao {
         return manager.hasUser(name);
     }
 
-    public List<EMContact> getContact() {
-        return manager.getContact();
+    public List<EMContact> getContactList() {
+        return manager.getContactList();
     }
 }

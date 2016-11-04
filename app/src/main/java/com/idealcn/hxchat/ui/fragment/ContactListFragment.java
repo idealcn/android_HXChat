@@ -78,7 +78,7 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
 
         userList.clear();
         UserDao userDao = new UserDao();
-        userList.addAll( userDao.getContact());
+        userList.addAll( userDao.getContactList());
         adapter.notifyDataSetChanged();
     }
 

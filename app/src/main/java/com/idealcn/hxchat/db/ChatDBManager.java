@@ -94,7 +94,7 @@ public class ChatDBManager {
         }
     }
 
-    public List<EMContact> getContact() {
+    public List<EMContact> getContactList() {
         List<EMContact> userList = new ArrayList<>();
         SQLiteDatabase database = helper.getReadableDatabase();
         String sql = "select "+UserDao.KEY_NAME+" from "+UserDao.TABLE_NAME;
