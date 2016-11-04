@@ -4,7 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +36,9 @@ public class LoginActivity extends ChatBaseActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        String currentUserName = PreferenceUtils.getInstance().getCurrentUserName();
+        if(!TextUtils.isEmpty(currentUserName))
+            mLoginName.setText(currentUserName);
     }
 
 
@@ -92,8 +95,6 @@ public class LoginActivity extends ChatBaseActivity{
                 });
             }
         }.start();
-
-
     }
 
 

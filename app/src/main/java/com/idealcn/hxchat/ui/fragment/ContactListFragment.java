@@ -26,6 +26,7 @@ import java.util.List;
 /**
  * author:idealcn
  * date:16-8-7 下午10:43
+ * 类描述:联系人界面的fragment
  */
 @ContentView(R.layout.fragment_contact_list)
 public class ContactListFragment extends ChatBaseFragment implements View.OnClickListener {
@@ -63,10 +64,7 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
         adapter = new ContactListAdapter(getActivity(), android.R.layout.simple_list_item_1, userList);
         mContactList.setAdapter(adapter);
 
-//        List<String> lists = new ArrayList<>();
-//        lists.add("item---1");
-//        lists.add("item---3");
-//        mContactList.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,lists));
+
     }
 
     @Override
@@ -78,6 +76,7 @@ public class ContactListFragment extends ChatBaseFragment implements View.OnClic
         contactItemView.setNotifyVisible(flag);
 
 
+        userList.clear();
         UserDao userDao = new UserDao();
         userList.addAll( userDao.getContact());
         adapter.notifyDataSetChanged();

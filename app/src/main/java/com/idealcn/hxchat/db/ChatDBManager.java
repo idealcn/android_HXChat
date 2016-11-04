@@ -40,6 +40,19 @@ public class ChatDBManager {
         }
     }
 
+    public boolean hasUser(String name){
+        boolean flag = false;
+        SQLiteDatabase database = helper.getReadableDatabase();
+        if (database.isOpen()){
+            String sql = "select * from "+UserDao.TABLE_NAME+" where "+UserDao.KEY_NAME+" = ?";
+            Cursor cursor = database.rawQuery(sql, new String[]{name});
+           if (cursor.getCount()>0){
+               flag = true;
+           }
+        }
+        return flag;
+    }
+
 
     public List<InviteMessage> getInviteMessageList() {
         List<InviteMessage> messageList = new ArrayList<>();

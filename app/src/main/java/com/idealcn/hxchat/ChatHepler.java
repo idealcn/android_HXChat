@@ -50,7 +50,7 @@ public class ChatHepler {
     public void init(Context context) {
         this.context = context;
         EMOptions options = new EMOptions();
-        options.setAcceptInvitationAlways(true);
+        options.setAcceptInvitationAlways(false);
         EMClient.getInstance().init(context, options);
         //状态连接的监听
         EMClient.getInstance().addConnectionListener(new MyConnectionListener());
@@ -63,14 +63,7 @@ public class ChatHepler {
         //聊天室的监听
         EMClient.getInstance().chatroomManager().addChatRoomChangeListener(new MyEMChatRoomListener());
 
-        //获取黑名单列表
-        try {
 
-            blackList = EMClient.getInstance().contactManager().getBlackListFromServer();
-
-        } catch (HyphenateException e) {
-            e.printStackTrace();
-        }
 
 
         //注册语音和视频的广播接收者

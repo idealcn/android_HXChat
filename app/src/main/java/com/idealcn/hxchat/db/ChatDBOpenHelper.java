@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.idealcn.hxchat.ChatApplication;
+import com.idealcn.hxchat.tools.PreferenceUtils;
 
 /**
  * author:idealgn
@@ -25,7 +26,7 @@ public class ChatDBOpenHelper extends SQLiteOpenHelper {
 
 
     private ChatDBOpenHelper(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
+        super(context, PreferenceUtils.getInstance().getCurrentUserName()+DB_NAME, null, DB_VERSION);
     }
 
     @Override

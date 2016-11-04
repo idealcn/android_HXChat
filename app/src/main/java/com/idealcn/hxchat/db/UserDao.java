@@ -32,6 +32,9 @@ public class UserDao {
         manager.saveUser(user);
     }
 
+    public boolean hasUser(String name){
+        return manager.hasUser(name);
+    }
 
     public List<EMContact> getContact() {
         return manager.getContact();

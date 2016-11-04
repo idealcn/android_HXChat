@@ -21,6 +21,7 @@ import java.util.List;
 /**
  * author:idealcn
  * date:2016/10/28 23:01
+ * 类描述:显示申请通知的adapter
  */
 public class InviteMsgAdapter extends BaseAdapter  {
 
@@ -57,8 +58,12 @@ public class InviteMsgAdapter extends BaseAdapter  {
 
         TextView tvFrom = ViewHolder.getView(convertView, R.id.from);
         TextView tvReason = ViewHolder.getView(convertView, R.id.reason);
-        Button btnAccept = ViewHolder.getView(convertView,R.id.accept);
-        Button btnRefuse = ViewHolder.getView(convertView,R.id.refuse);
+        final Button btnAccept = ViewHolder.getView(convertView,R.id.accept);
+        final Button btnRefuse = ViewHolder.getView(convertView,R.id.refuse);
+
+        btnAccept.setVisibility(View.VISIBLE);
+        btnRefuse.setEnabled(true);
+        btnAccept.setEnabled(true);
 
         final InviteMessage message = messageList.get(position);
 
@@ -69,12 +74,15 @@ public class InviteMsgAdapter extends BaseAdapter  {
             @Override
             public void onClick(View v) {
                 accept(message.getFrom());
+                btnAccept.setEnabled(false);
             }
         });
         btnRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 refuse(message.getFrom());
+                btnRefuse.setEnabled(false);
+                btnAccept.setVisibility(View.GONE);
             }
         });
 

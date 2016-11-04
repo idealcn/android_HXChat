@@ -11,7 +11,9 @@ import android.widget.Button;
 
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMContact;
 import com.idealcn.hxchat.R;
+import com.idealcn.hxchat.db.UserDao;
 import com.idealcn.hxchat.tools.LogUtils;
 import com.idealcn.hxchat.ui.fragment.ChatBaseFragment;
 import com.idealcn.hxchat.ui.fragment.ContactListFragment;
@@ -55,6 +57,7 @@ public class MainActivity extends ChatBaseActivity {
     private Button mBtnStatus;
 
     private boolean isInviteIconVisible;
+    private UserDao userDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,13 +78,16 @@ public class MainActivity extends ChatBaseActivity {
         mBtnContact.setSelected(false);
         mBtnStatus.setSelected(false);
         mBtnMessage.setSelected(true);
-
+        userDao = new UserDao();
         EMClient.getInstance().contactManager().aysncGetAllContactsFromServer(new EMValueCallBack<List<String>>() {
             @Override
             public void onSuccess(List<String> strings) {
                 LogUtils.d("onSuccess: "+strings.size());
                 for (String s : strings){
-
+                    if (!userDao.hasUser(s)) {
+                        EMContact user = new EMContact(s);
+                        userDao.saveUser(user);
+                    }
                 }
             }
 
