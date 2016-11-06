@@ -2,6 +2,7 @@ package com.idealcn.hxchat;
 
 import android.app.Application;
 
+import com.idealcn.hxchat.db.ChatDBOpenHelper;
 import com.idealcn.hxchat.tools.PreferenceUtils;
 
 import org.xutils.x;

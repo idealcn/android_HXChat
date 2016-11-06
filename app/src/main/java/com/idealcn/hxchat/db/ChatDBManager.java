@@ -92,6 +92,13 @@ public class ChatDBManager {
         if(database.isOpen()){
             long insert = database.insert(InviteMessageDao.TABLE_NAME, null, values);
         }
+
+//        String sql = "insert into "+InviteMessageDao.TABLE_NAME
+//                + "("+InviteMessageDao.COLUMN_NAME_FROM
+//                +","+InviteMessageDao.COLUMN_NAME_TIME+
+//                ","+InviteMessageDao.COLUMN_NAME_REASON+")"
+//                +" values ("+msg.getFrom()+","+msg.getReason()+","+msg.getTime()+")";
+
     }
 
     public List<EMContact> getContactList() {
@@ -105,5 +112,29 @@ public class ChatDBManager {
             userList.add(user);
         }
         return userList;
+    }
+
+    public void deleteInviteMsg(String from) {
+        SQLiteDatabase database = helper.getReadableDatabase();
+        String where = InviteMessageDao.COLUMN_NAME_FROM +" = "+from;
+        int delete = database.delete(InviteMessageDao.TABLE_NAME, where, null);
+//        String sql = "delete from "+InviteMessageDao.TABLE_NAME + "where " + InviteMessageDao.COLUMN_NAME_FROM + " = " + from;
+    }
+
+
+    public InviteMessage getInviteMsg(String from){
+        SQLiteDatabase database = helper.getReadableDatabase();
+        InviteMessage message = new InviteMessage();
+        String sql = "select from "+InviteMessageDao.TABLE_NAME
+                    +" where "+InviteMessageDao.COLUMN_NAME_FROM + " = ?";//这里用到占位符
+        if (database.isOpen()){
+            Cursor cursor = database.rawQuery(sql, new String[]{from});
+            while(cursor.moveToNext()){
+
+                String reason = cursor.getString(cursor.getColumnIndex(InviteMessageDao.COLUMN_NAME_REASON));
+
+            }
+        }
+        return message;
     }
 }

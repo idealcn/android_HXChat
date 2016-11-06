@@ -33,6 +33,7 @@ public class InviteMessageDao {
 
 
     private ChatDBManager manager;
+
     public InviteMessageDao(){
         manager = ChatDBManager.getManager();
     }
@@ -47,5 +48,11 @@ public class InviteMessageDao {
         manager.saveInviteMsg(msg);
     }
 
-
+    /**
+     * 删除某条申请信息
+     * @param from
+     */
+    public void deleteInviteMsg(String from) {
+        manager.deleteInviteMsg(from);
+    }
 }

@@ -15,12 +15,15 @@ public class ChatDBOpenHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "chat.db";
     private static final int DB_VERSION = 1;
 
+    private static  String name = null;
 
     private static ChatDBOpenHelper helper;
 
     public synchronized static ChatDBOpenHelper getHelper(){
-        if (helper==null)
+        if (helper==null){
+             name = getDbName();
             helper = new ChatDBOpenHelper(ChatApplication.getInstance());
+        }
         return helper;
     }
 
@@ -29,7 +32,7 @@ public class ChatDBOpenHelper extends SQLiteOpenHelper {
     }
 
     private ChatDBOpenHelper(Context context) {
-        super(context, getDbName(), null, DB_VERSION);
+        super(context, name, null, DB_VERSION);
     }
 
     @Override
